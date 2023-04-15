@@ -4,6 +4,8 @@ import java.util.Calendar
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
+data class DTO(val nameFunction: String, val timeStart: Long, var timeDuration:Long, var url:String)
+
 object TimeLog {
     private val times = ArrayList<Time>()
     private val pending = HashMap<Int, Long>()
