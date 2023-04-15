@@ -1,9 +1,11 @@
 package ru.ok.android.itmohack2023
 
+import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Space
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -48,9 +50,7 @@ class OkHttpActivity : AppCompatActivity() {
             .url(url)
             .build()
 
-
         OkHttpClient().newCall(request).execute()
             .use {  response -> return response.body?.string() }
-
     }
 }
