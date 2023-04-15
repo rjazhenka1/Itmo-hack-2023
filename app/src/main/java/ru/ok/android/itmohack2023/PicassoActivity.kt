@@ -28,7 +28,6 @@ class PicassoActivity : AppCompatActivity() {
     }
 
     private fun bindImages() {
-
         Picasso.get().load(URLS[(0 until size).random()]).placeholder(getDrawable(R.drawable.ico_dog)!!).into(dog1)
         Picasso.get().load(URLS[(0 until size).random()]).placeholder(getDrawable(R.drawable.ico_dog)!!).into(dog2)
         Picasso.get().load(URLS[(0 until size).random()]).placeholder(getDrawable(R.drawable.ico_dog)!!).into(dog3)

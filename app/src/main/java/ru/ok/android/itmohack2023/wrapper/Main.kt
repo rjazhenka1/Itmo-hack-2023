@@ -13,8 +13,8 @@ fun main() {
         .build()
 
 
-    TimeLog.measure {
+    TimeLog.measure ({
         OkHttpClient().newCall(request).execute()
             .use { response -> println(response.body?.string()) }
-    }
+    }, "test", "https://cat-fact.herokuapp.com/facts")
 }

@@ -8,7 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
-import ru.ok.android.itmohack2023.timelog.TimeLog
+import ru.ok.android.itmohack2023.timelog.Measure
+import ru.ok.android.itmohack2023.timelog.URL
 import java.io.IOException
 
 class OkHttpActivity : AppCompatActivity() {
@@ -40,16 +41,16 @@ class OkHttpActivity : AppCompatActivity() {
     }
 
 
+    @Measure
     @Throws(IOException::class)
-    fun run(url: String): String? {
+    fun run(@URL url: String): String? {
         val request: Request = Request.Builder()
             .url(url)
             .build()
 
 
-        return TimeLog.measure {
-            OkHttpClient().newCall(request).execute()
-                .use { response -> response.body?.string() }
-        }
+        OkHttpClient().newCall(request).execute()
+            .use {  response -> return response.body?.string() }
+
     }
 }

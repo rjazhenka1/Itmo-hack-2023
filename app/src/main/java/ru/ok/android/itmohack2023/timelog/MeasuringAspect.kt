@@ -1,25 +1,32 @@
 package ru.ok.android.itmohack2023.timelog
 
-import com.google.android.datatransport.runtime.dagger.Component
-import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
-import org.aspectj.lang.annotation.Pointcut
-import kotlin.coroutines.Continuation
 
 @Aspect
 class MeasuringAspect {
+    var url: String? = null;
 
-    //@Around("within(ru.ok.android.itmohack2023.*)")
     @Around("@annotation(ru.ok.android.itmohack2023.timelog.Measure)")
     fun log(joinPoint: ProceedingJoinPoint): Any? {
-        val id = TimeLog.start()
-        val result: Any? = joinPoint.proceed(joinPoint.args)
-        println("SDOH $result");
+        println(joinPoint.args)
+        val url = joinPoint.args
+            .filterIsInstance<String>()
+            .firstOrNull { it::class.java.isAnnotationPresent(URL::class.java) }
+
+        val id = TimeLog.start(joinPoint.toShortString(), url)
+        val result: Any? = joinPoint.proceed()
         TimeLog.end(id)
         return result
     }
 }
 
+/**
+ * An annotation that enables logging for a method
+ */
+@Target(AnnotationTarget.FUNCTION)
 annotation class Measure
+
+@Target(AnnotationTarget.VALUE_PARAMETER)
+annotation class URL
