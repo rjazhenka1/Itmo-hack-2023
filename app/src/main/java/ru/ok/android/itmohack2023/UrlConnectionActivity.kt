@@ -6,6 +6,7 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
+import ru.ok.android.itmohack2023.timelog.TimeLog
 import java.net.URL
 
 class UrlConnectionActivity : AppCompatActivity() {
@@ -15,21 +16,25 @@ class UrlConnectionActivity : AppCompatActivity() {
         val list = findViewById<ViewGroup>(R.id.list)
 
         Threads.ioPool.execute {
-            val connection = URL("https://cat-fact.herokuapp.com/facts").openConnection()
-            val text = connection.getInputStream().bufferedReader().readText()
-            val textJson = JSONArray(text)
-            for (i in 0 until textJson.length()) {
-                val factJson = textJson.getJSONObject(i)
-                val factText = factJson.getString("text")
+            TimeLog.measure ({
+                val connection = URL("https://cat-fact.herokuapp.com/facts").openConnection()
+                val text = connection.getInputStream().bufferedReader().readText()
+                val textJson = JSONArray(text)
+                for (i in 0 until textJson.length()) {
+                    val factJson = textJson.getJSONObject(i)
+                    val factText = factJson.getString("text")
 
-                runOnUiThread {
-                    val textView = TextView(this)
-                    textView.text = factText
-                    list.addView(textView)
-                    val space = Space(this)
-                    space.minimumHeight = resources.getDimensionPixelOffset(R.dimen.padding_normal)
-                    list.addView(space)
-                }
+                    runOnUiThread {
+                        val textView = TextView(this)
+                        textView.text = factText
+                        list.addView(textView)
+                        val space = Space(this)
+                        space.minimumHeight =
+                            resources.getDimensionPixelOffset(R.dimen.padding_normal)
+                        list.addView(space)
+                    }
+                }, this::class.qualifiedName,
+                "https://cat-fact.herokuapp.com/facts")
             }
         }
     }
