@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        //
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         findViewById<View>(R.id.url_connection).setOnClickListener {
             startActivity(Intent(this, UrlConnectionActivity::class.java))
         }
