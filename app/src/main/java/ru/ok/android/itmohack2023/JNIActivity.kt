@@ -10,6 +10,7 @@ import ru.ok.android.itmohack2023.timelog.Measure
 
 class JNIActivity : AppCompatActivity() {
 
+    @Measure
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jniactivity)
