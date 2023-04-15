@@ -51,13 +51,13 @@ class Writer {
         try {
             val calendar = Calendar.getInstance()
             calendar.setTimeInMillis(data.timeStart)
-            var durationInSeconds = data.timeDuration / 1000
+            var durationInSeconds = data.timeDuration?.div(1000)
             csvWriter!!.writeNext(
                 listOf(
                     data.nameFunction,
                     formatter!!.format(data.timeStart),
                     durationInSeconds.toString() + "s " +
-                            (data.timeDuration % 1000).toString() + "ms",
+                            (data.timeDuration?.rem(1000)).toString() + "ms",
                     data.url
                 ).toTypedArray()
             )
