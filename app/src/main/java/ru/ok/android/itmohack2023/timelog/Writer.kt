@@ -4,71 +4,47 @@ package ru.ok.android.itmohack2023.timelog
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.opencsv.CSVWriter
-import java.io.FileWriter
+import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import java.io.IOException
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.text.SimpleDateFormat
-import java.util.Arrays
-import java.util.Calendar
-
+import okhttp3.FormBody
+import okhttp3.Request
+import okhttp3.Response
 
 @SuppressLint("SimpleDateFormat")
 @RequiresApi(Build.VERSION_CODES.O)
 class Writer {
-    var logFileName = "stat.csv"
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    var path = Paths.get(
-        "app",
-        "src",
-        "main",
-        "java",
-        "ru",
-        "ok",
-        "android",
-        "itmohack2023",
-        "timelog",
-        logFileName
-    )
-    private val CSV_HEADER = arrayOf<String>("nameFunction", "timeStart", "timeDuration", "url")
-    private var csvWriter: CSVWriter?
-    var formatter: SimpleDateFormat?
-
-    init {
-        if (!Files.exists(path)) {
-            Files.createFile(path)
-        }
-        csvWriter = CSVWriter(FileWriter(path.toFile()))
-        csvWriter!!.writeNext(CSV_HEADER)
-        formatter = SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS")
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.O)
     fun writeMess(data: DTO) {
+
+        val client = OkHttpClient()
+
+        val formBody = data.name?.let {
+            data.url?.let { it1 ->
+                FormBody.Builder()
+                    .add("device_id", data.device_id.toString())
+                    .add("id", data.id.toString())
+                    .add("start_time", data.start_time.toString())
+                    .add("duration", data.duration.toString())
+                    .add("name", it)
+                    .add("url", it1)
+                    .add("data_size", data.data_size.toString())
+                    .build()
+            }
+        }
+        val request = formBody?.let {
+            Request.Builder()
+                .url("http://164.92.210.100:8080")
+                .post(it)
+                .build()
+        }
+
         try {
-            val calendar = Calendar.getInstance()
-            calendar.setTimeInMillis(data.timeStart)
-            var durationInSeconds = data.timeDuration?.div(1000)
-            csvWriter!!.writeNext(
-                listOf(
-                    data.nameFunction,
-                    formatter!!.format(data.timeStart),
-                    durationInSeconds.toString() + "s " +
-                            (data.timeDuration?.rem(1000)).toString() + "ms",
-                    data.url
-                ).toTypedArray()
-            )
+            val response = request?.let { client.newCall(it).execute() }
+            print(response)
         } catch (e: IOException) {
             e.printStackTrace()
         }
-        print("sended")
-    }
-
-    fun close() {
-        csvWriter!!.close()
     }
 }
 

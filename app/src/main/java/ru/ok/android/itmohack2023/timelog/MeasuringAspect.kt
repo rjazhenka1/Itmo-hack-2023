@@ -1,5 +1,7 @@
 package ru.ok.android.itmohack2023.timelog
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.google.android.datatransport.runtime.dagger.Component
 import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint
@@ -12,6 +14,7 @@ import kotlin.coroutines.Continuation
 class MeasuringAspect {
 
     //@Around("within(ru.ok.android.itmohack2023.*)")
+    @RequiresApi(Build.VERSION_CODES.O)
     @Around("@annotation(ru.ok.android.itmohack2023.timelog.Measure)")
     fun log(joinPoint: ProceedingJoinPoint): Any? {
         val id = TimeLog.start()

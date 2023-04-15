@@ -1,9 +1,11 @@
 package ru.ok.android.itmohack2023
 
+import android.os.Build
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Space
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -40,6 +42,7 @@ class OkHttpActivity : AppCompatActivity() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Throws(IOException::class)
     fun run(url: String): String? {
         val request: Request = Request.Builder()
