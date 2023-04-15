@@ -53,7 +53,8 @@ object TimeLog {
         pending.remove(id);
 
         values[id]!!.duration = end - start
-
+        var writer = Writer()
+        values[id]?.let { writer.writeMess(it) }
         println("OK" + values[id]!!.url + " " + values[id]!!.name)
     }
 
