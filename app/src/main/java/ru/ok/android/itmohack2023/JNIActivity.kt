@@ -3,11 +3,14 @@ package ru.ok.android.itmohack2023
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import org.aspectj.lang.annotation.Aspect
 import org.json.JSONArray
 import org.json.JSONObject
+import ru.ok.android.itmohack2023.timelog.Measure
 
 class JNIActivity : AppCompatActivity() {
 
+    @Measure
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_jniactivity)

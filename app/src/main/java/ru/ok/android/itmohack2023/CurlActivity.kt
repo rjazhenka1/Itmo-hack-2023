@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import org.json.JSONArray
+import ru.ok.android.itmohack2023.timelog.Measure
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
@@ -24,6 +25,7 @@ class CurlActivity : AppCompatActivity() {
         Thread { executeShellScript() }.start()
     }
 
+    @Measure
     private fun executeShellScript() {
         val command = """
                     curl -X GET \
