@@ -1,13 +1,10 @@
 package ru.ok.android.itmohack2023.timelog
 
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import com.google.android.datatransport.runtime.dagger.Component
-import org.aspectj.lang.JoinPoint
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
+import kotlin.reflect.full.findAnnotation
 
 @Aspect
 class MeasuringAspect {
@@ -16,9 +13,9 @@ class MeasuringAspect {
     @Around("execution(* *(..)) && @annotation(ru.ok.android.itmohack2023.timelog.Measure)")
     fun log(joinPoint: ProceedingJoinPoint): Any? {
         println(joinPoint.args)
-        val url = joinPoint.args
+        /*val url = joinPoint.args
             .filterIsInstance<String>()
-            .firstOrNull { it::class.java.isAnnotationPresent(URL::class.java) }
+            .firstOrNull { it::class.annotations.size > 0 }*/
 
         val id = TimeLog.start(joinPoint.toShortString(), url)
         val result: Any? = joinPoint.proceed()
@@ -33,5 +30,8 @@ class MeasuringAspect {
 @Target(AnnotationTarget.FUNCTION)
 annotation class Measure
 
+/**
+ * Annotation that marks a parameter with a URL for a function that is being logged
+ */
 @Target(AnnotationTarget.VALUE_PARAMETER)
 annotation class URL
