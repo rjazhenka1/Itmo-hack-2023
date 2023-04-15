@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import android.widget.Space
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
+import ru.hackaton.profiler.okhttp3.OkHttp3Client
 import ru.ok.android.itmohack2023.timelog.TimeLog
 import java.io.IOException
 
@@ -48,7 +48,7 @@ class OkHttpActivity : AppCompatActivity() {
 
 
         return TimeLog.measure {
-            OkHttpClient().newCall(request).execute()
+            OkHttp3Client().getClient().build().newCall(request).execute()
                 .use { response -> response.body?.string() }
         }
     }

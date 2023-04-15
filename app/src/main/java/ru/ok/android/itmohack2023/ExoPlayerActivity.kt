@@ -7,6 +7,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.StyledPlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
+import ru.hackaton.profiler.exoplayer.ExoPlayerClient
 
 class ExoPlayerActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class ExoPlayerActivity : AppCompatActivity() {
     }
 
     private fun preparePlayer() {
-        exoPlayer = ExoPlayer.Builder(this).build()
+        exoPlayer = ExoPlayerClient().getClient(this)
         exoPlayer?.playWhenReady = true
         val playerView = findViewById<StyledPlayerView>(R.id.playerView)
         playerView.player = exoPlayer
