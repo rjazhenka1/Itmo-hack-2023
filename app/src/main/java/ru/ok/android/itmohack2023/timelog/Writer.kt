@@ -17,29 +17,29 @@ class Writer {
     fun writeMess(data: DTO) {
         val client = OkHttpClient()
 
-        val formBody = data.name?.let {
-            data.url?.let { it1 ->
-                FormBody.Builder()
-                    .add("id", data.id.toString())
-                    .add("start_time", data.start_time.toString())
-                    .add("duration", data.duration.toString())
-                    .add("name", it)
-                    .add("url", it1)
-                    .add("data_size", data.data_size.toString())
-                    .build()
-            }
-        }
-        val request = formBody?.let {
-            Request.Builder()
-                .url("http://164.92.210.100:8080")
-                .post(it)
+        val formBody =
+            FormBody.Builder()
+                .add("id", data.id.toString())
+                .add("start_time", data.start_time.toString())
+                .add("duration", data.duration.toString())
+                .add("name", data.name.toString())
+                .add("url", data.url.toString())
+                .add("data_size", data.data_size.toString())
                 .build()
-        }
+
+
+        val request = Request.Builder()
+            .url("http://164.92.210.100:8080")
+            .post(formBody!!)
+            .build()
 
         try {
-            val response = request?.let { client.newCall(it).execute() }
-            print(response)
+            println(123)
+            println("request    $request")
+            val response = client.newCall(request).execute()
+            println("kek       $response")
         } catch (e: IOException) {
+            println("Exception " + e.message)
             e.printStackTrace()
         }
     }

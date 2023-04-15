@@ -33,9 +33,9 @@ class UrlConnectionActivity : AppCompatActivity() {
                             resources.getDimensionPixelOffset(R.dimen.padding_normal)
                         list.addView(space)
                     }
-                }, this::class.qualifiedName,
+                }
+            }, this::class.qualifiedName!!,
                 "https://cat-fact.herokuapp.com/facts")
-            }
         }
     }
 }
