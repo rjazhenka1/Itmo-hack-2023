@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
+
+    id "io.github.wurensen.android-aspectjx" version "3.3.2"
+
 }
 
 android {
@@ -39,7 +42,6 @@ android {
 }
 
 dependencies {
-    implementation'org.jetbrains.kotlin:kotlin-reflect:1.8.20'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.8.0'
