@@ -13,8 +13,10 @@ object TimeLog {
         val time = measureTimeMillis { result = code() }
         times.add(Time(start, time))
         return result
-    }
+    }":wq
+    "
 
 
     data class Time(val callTime: Long, val timeInMillis: Long)
+        :q
 }
