@@ -4,7 +4,6 @@ package ru.ok.android.itmohack2023.timelog
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
-import kotlin.reflect.full.findAnnotation
 
 @Aspect
 class MeasuringAspect {
