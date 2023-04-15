@@ -1,12 +1,18 @@
 package ru.ok.android.itmohack2023.timelog
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.util.Calendar
 import kotlin.random.Random
 import kotlin.system.measureTimeMillis
 
+data class DTO(val nameFunction: String, val timeStart: Long, var timeDuration:Long, var url:String)
+
 object TimeLog {
     private val times = ArrayList<Time>()
     private val pending = HashMap<Int, Long>()
+    @RequiresApi(Build.VERSION_CODES.O)
+    private var writer = Writer();
 
     fun start(): Int {
         var id: Int;
@@ -29,10 +35,10 @@ object TimeLog {
 
     fun <T> measure(code: () -> T): T {
         val calendar = Calendar.getInstance()
-        val start = calendar.timeInMillis
-        var result: T
-        val time = measureTimeMillis { result = code() }
-        times.add(Time(start, time))
+        val id = start()
+        var result = code()
+        end(id)
+
         return result
     }
 

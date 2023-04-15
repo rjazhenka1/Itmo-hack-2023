@@ -73,4 +73,8 @@ dependencies {
 
     //javassist
     implementation 'org.javassist:javassist:3.29.2-GA'
+
+    // https://mvnrepository.com/artifact/com.opencsv/opencsv
+    implementation 'com.opencsv:opencsv:3.7'
+
 }
