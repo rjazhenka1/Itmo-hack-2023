@@ -30,7 +30,7 @@ object MeasurementApi {
                 .add("url", measurement.url.toString())
                 .add(
                     "data_size",
-                    (measurement.status.endSizeStamp?.minus(measurement.status.startTimestamp)).toString()
+                    (measurement.status.endSizeStamp?.minus(measurement.status.startSizeStamp)).toString()
                 )
                 .add("exception", measurement.status.exception.toString())
                 .add("stack_trace", st)
