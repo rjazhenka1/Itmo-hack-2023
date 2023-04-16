@@ -16,7 +16,7 @@ class LowSpeedFilter : AbstractFilter() {
 
         for (i in this.lastMeasurements) {
             if (i.size != null && i.status.endTimestamp != null) {
-                avarage += i.size!!.toFloat() / (i.stackTrace!!.size)
+                avarage += i.size!!.toFloat() / (i.status.endTimestamp!!)
                 count++
             }
         }

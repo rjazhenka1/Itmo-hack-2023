@@ -6,7 +6,8 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
-import ru.hackaton.profiler.timelog.TimeLog
+import ru.hackaton.profiler.base.Library
+import ru.hackaton.profiler.base.MeasurementService
 import java.net.URL
 
 class UrlConnectionActivity : AppCompatActivity() {
@@ -16,8 +17,9 @@ class UrlConnectionActivity : AppCompatActivity() {
         val list = findViewById<ViewGroup>(R.id.list)
 
         Threads.ioPool.execute {
-            TimeLog.measure ({
-                val connection = URL("https://cat-fact.herokuapp.com/facts").openConnection()
+                val measurement = MeasurementService.startMeasurement(this::class.simpleName!!, Library.Unknown)
+                val url = "https://cat-fact.herokuapp.com/facts";
+                val connection = URL(url).openConnection()
                 val text = connection.getInputStream().bufferedReader().readText()
                 val textJson = JSONArray(text)
                 for (i in 0 until textJson.length()) {
@@ -33,9 +35,9 @@ class UrlConnectionActivity : AppCompatActivity() {
                             resources.getDimensionPixelOffset(R.dimen.padding_normal)
                         list.addView(space)
                     }
-                }
-            }, this::class.qualifiedName!!,
-                "https://cat-fact.herokuapp.com/facts")
+                measurement.url = url
+                MeasurementService.endMeasurement(measurement.id)
+            }
         }
     }
 }
