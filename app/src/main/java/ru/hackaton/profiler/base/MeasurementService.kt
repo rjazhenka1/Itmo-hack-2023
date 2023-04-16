@@ -1,5 +1,6 @@
 package ru.hackaton.profiler.base
 
+import android.net.TrafficStats
 import kotlin.random.Random
 
 object MeasurementService {
@@ -31,9 +32,12 @@ object MeasurementService {
         base[id] = measurement
         return measurement
     }
+
     fun endMeasurement(id: String, url: String?, size: Long?, send: Boolean): Measurement? {
         val measurement = base[id];
         measurement?.status?.endTimestamp = System.currentTimeMillis()
+        measurement?.status?.endSizeStamp =
+            TrafficStats.getTotalRxBytes() + TrafficStats.getTotalTxBytes()
         measurement?.url = url
         measurement?.size = size
         if (send) {
@@ -41,9 +45,11 @@ object MeasurementService {
         }
         return measurement
     }
+
     fun endMeasurement(id: String): Measurement? {
         return endMeasurement(id, true)
     }
+
     fun endMeasurement(id: String, send: Boolean): Measurement? {
         return endMeasurement(id, null, null, send)
     }
