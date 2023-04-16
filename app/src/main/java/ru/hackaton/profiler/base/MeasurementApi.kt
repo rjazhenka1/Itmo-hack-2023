@@ -3,6 +3,7 @@ package ru.hackaton.profiler.base
 import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import ru.ok.android.itmohack2023.Threads
 import java.io.IOException
 
 object MeasurementApi {
@@ -42,14 +43,15 @@ object MeasurementApi {
             .post(formBody)
             .build()
 
-        try {
-            println(123)
-            println("request    ${measurement.library}")
-            val response = client.newCall(request).execute()
-            println("kek       $response")
-        } catch (e: IOException) {
-            println("Exception " + e.message)
-            e.printStackTrace()
+        Threads.ioPool.execute {
+            try {
+                println("request    ${measurement.library}")
+                val response = client.newCall(request).execute()
+                println("got response       $response")
+            } catch (e: IOException) {
+                println("Exception " + e.message)
+                e.printStackTrace()
+            }
         }
     }
 
