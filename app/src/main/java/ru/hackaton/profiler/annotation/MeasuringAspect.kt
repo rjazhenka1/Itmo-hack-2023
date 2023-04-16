@@ -1,24 +1,27 @@
-package ru.hackaton.profiler.timelog
+package ru.hackaton.profiler.annotation
 
 
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect
+import ru.hackaton.profiler.base.Library
+import ru.hackaton.profiler.base.MeasurementService
 
 @Aspect
 class MeasuringAspect {
     var url: String? = null;
 
-    @Around("execution(* *(..)) && @annotation(ru.ok.android.itmohack2023.timelog.Measure)")
+    @Around("execution(* *(..)) && @annotation(ru.hackaton.profiler.annotation.Measure)")
     fun log(joinPoint: ProceedingJoinPoint): Any? {
         println(joinPoint.args)
         /*val url = joinPoint.args
             .filterIsInstance<String>()
             .firstOrNull { it::class.annotations.size > 0 }*/
 
-        val id = TimeLog.start(joinPoint.toShortString(), url)
+        val measure = MeasurementService.startMeasurement(joinPoint.toShortString(), Library.Unknown)
         val result: Any? = joinPoint.proceed()
-        TimeLog.end(id)
+        MeasurementService.endMeasurement(measure.id)
+        measure.url = url
         return result
     }
 }
