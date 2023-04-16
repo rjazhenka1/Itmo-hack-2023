@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.setPadding
 import org.json.JSONArray
-import ru.hackaton.profiler.timelog.Measure
+import ru.hackaton.profiler.annotation.Measure
 import java.io.BufferedReader
 import java.io.InputStreamReader
 

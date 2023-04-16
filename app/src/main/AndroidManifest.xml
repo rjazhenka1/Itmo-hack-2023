@@ -13,8 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ItmoHack2023"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".MainActivity"
@@ -35,11 +35,18 @@
         <activity android:name="ru.ok.android.itmohack2023.JNIActivity" />
         <activity android:name="ru.ok.android.itmohack2023.OkHttpActivity" />
         <activity android:name="ru.ok.android.itmohack2023.ExoPlayerActivity" />
-        <activity android:name="ru.ok.android.itmohack2023.FrescoActivity"/>
+        <activity android:name="ru.ok.android.itmohack2023.FrescoActivity" />
         <activity android:name="ru.ok.android.itmohack2023.RetrofitActivity" />
-        <activity android:name="ru.ok.android.itmohack2023.GlideActivity"/>
-        <activity android:name="ru.ok.android.itmohack2023.PicassoActivity"/>
-        <activity android:name="ru.ok.android.itmohack2023.DownloadManagerActivity"/>
+        <activity android:name="ru.ok.android.itmohack2023.GlideActivity" />
+        <activity android:name="ru.ok.android.itmohack2023.PicassoActivity" />
+        <activity android:name="ru.ok.android.itmohack2023.DownloadManagerActivity" />
+        <receiver
+            android:name="ru.hackaton.profiler.downloadmanager.DownloadBroadcastReceiver"
+            android:exported="true"
+            tools:ignore="WrongManifestParent">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            </intent-filter>
+        </receiver>
     </application>
-
 </manifest>

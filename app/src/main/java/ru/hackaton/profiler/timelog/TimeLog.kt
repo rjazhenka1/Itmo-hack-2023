@@ -1,11 +1,5 @@
 package ru.hackaton.profiler.timelog
 
-import android.annotation.SuppressLint
-import android.content.Context
-import android.os.Build
-import android.provider.Settings
-import androidx.core.content.ContentProviderCompat.requireContext
-import java.security.AccessController.getContext
 import java.util.Calendar
 import kotlin.random.Random
 

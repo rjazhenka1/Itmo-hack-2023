@@ -14,7 +14,6 @@ import retrofit2.Response
 import ru.ok.android.itmohack2023.retrofit.CatsApi
 import ru.ok.android.itmohack2023.retrofit.RetrofitProvider
 import ru.ok.android.itmohack2023.retrofit.dto.CatFact
-import ru.hackaton.profiler.timelog.Measure
 
 class RetrofitActivity : Activity() {
 

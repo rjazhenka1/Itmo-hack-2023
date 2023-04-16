@@ -6,6 +6,7 @@ import android.os.Looper
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.analytics.DefaultAnalyticsCollector
 import com.google.android.exoplayer2.util.Clock
+import com.google.android.exoplayer2.util.SystemClock
 
 class ExoPlayerClient {
     fun getClient(context: Context) : ExoPlayer {

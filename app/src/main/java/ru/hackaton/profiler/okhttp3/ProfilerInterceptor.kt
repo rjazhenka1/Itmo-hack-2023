@@ -30,11 +30,11 @@ class ProfilerInterceptor(
         val measurement = MeasurementService.startMeasurement(name, library, getMethod(request))
         measurement.url = request.url.toString()
         val response = chain.proceed(request)
-        MeasurementService.endMeasurement(measurement.id)
         measurement.size = response.body?.contentLength()
         measurement.size = measurement.size?.plus(+response.headers.toString().length)
         measurement.size = measurement.size?.plus(+response.message.length)
         measurement.stackTrace = Stacktrace.getTraceback()
+        MeasurementService.endMeasurement(measurement.id)
         return response
     }
 }

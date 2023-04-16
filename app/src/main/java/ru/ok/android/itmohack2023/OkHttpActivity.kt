@@ -8,8 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
-import ru.hackaton.profiler.timelog.Measure
-import ru.hackaton.profiler.timelog.URL
+import ru.hackaton.profiler.okhttp3.OkHttp3Client
 import java.io.IOException
 
 class OkHttpActivity : AppCompatActivity() {
@@ -40,16 +39,15 @@ class OkHttpActivity : AppCompatActivity() {
         }
     }
 
-    @Measure
+
     @Throws(IOException::class)
-    fun run(@URL url: String): String? {
+    fun run(url: String): String? {
         val request: Request = Request.Builder()
             .url(url)
             .build()
 
 
-        OkHttpClient().newCall(request).execute()
-            .use { response -> return response.body?.string() }
-
+        return OkHttp3Client().getClient("Test").build().newCall(request).execute()
+            .use { response -> response.body?.string() }
     }
 }
