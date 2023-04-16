@@ -31,13 +31,26 @@ object MeasurementService {
         base[id] = measurement
         return measurement
     }
-
-    fun endMeasurement(id: String): Measurement? {
+    fun endMeasurement(id: String, url: String?, size: Long?, send: Boolean): Measurement? {
         val measurement = base[id];
         measurement?.status?.endTimestamp = System.currentTimeMillis()
+        measurement?.url = url
+        measurement?.size = size
+        if (send) {
+            checkMeasurement(measurement)
+        }
+        return measurement
+    }
+    fun endMeasurement(id: String): Measurement? {
+        return endMeasurement(id, true)
+    }
+    fun endMeasurement(id: String, send: Boolean): Measurement? {
+        return endMeasurement(id, null, null, send)
+    }
+
+    fun checkMeasurement(measurement: Measurement?) {
         if (measurement != null) {
             MeasurementFilterService.checkMeasurement(measurement)
         }
-        return measurement
     }
 }

@@ -7,5 +7,6 @@ enum class Library {
     Glide,
     OkHttp3,
     Picasso,
+    Retrofit,
     Unknown
 }
