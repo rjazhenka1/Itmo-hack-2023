@@ -1,7 +1,6 @@
 package ru.hackaton.profiler.base.filters
 
 import ru.hackaton.profiler.base.Measurement
-import kotlin.random.Random
 
 /**
  * This filter should implements all another filter
@@ -13,7 +12,7 @@ abstract class AbstractFilter {
     protected val lastMeasurements = ArrayList<Measurement>()
 
     open fun doFilter(measurement: Measurement): Boolean {
-        lastMeasurements.add(measurement);
+        lastMeasurements.add(measurement)
         return false
     }
 }

@@ -28,7 +28,10 @@ object MeasurementApi {
                 .add("library", measurement.library.toString())
                 .add("type", measurement.type.toString())
                 .add("url", measurement.url.toString())
-                .add("data_size", measurement.size.toString())
+                .add(
+                    "data_size",
+                    (measurement.status.endSizeStamp?.minus(measurement.status.startSizeStamp)).toString()
+                )
                 .add("exception", measurement.status.exception.toString())
                 .add("stack_trace", st)
                 .build()
