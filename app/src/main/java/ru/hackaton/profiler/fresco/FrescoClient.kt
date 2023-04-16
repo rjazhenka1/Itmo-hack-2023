@@ -9,7 +9,7 @@ import com.facebook.imagepipeline.listener.RequestListener
 class FrescoClient {
     fun initiate(context: Context) {
         val listeners: MutableSet<RequestListener> = HashSet()
-        listeners.add(ProfilerRequestListener())
+        listeners.add(ProfilerRequestListener("fresco"))
         val config = ImagePipelineConfig.newBuilder(context)
             .setRequestListeners(listeners)
             .build()

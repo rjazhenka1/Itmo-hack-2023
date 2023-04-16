@@ -73,7 +73,7 @@ dependencies {
 
     //javassist
     implementation 'org.javassist:javassist:3.29.2-GA'
-
+    implementation 'com.sun.net.httpserver:http:20070405'
 
 
 }

@@ -7,7 +7,7 @@ import com.google.android.exoplayer2.source.MediaLoadData
 import ru.hackaton.profiler.base.Library
 import ru.hackaton.profiler.base.MeasurementService
 import ru.hackaton.profiler.base.RequestType
-import ru.ok.android.itmohack2023.timelog.TimeLog
+import ru.hackaton.profiler.timelog.TimeLog
 
 class ProfilerAnalyticsCollector(
     private val name: String

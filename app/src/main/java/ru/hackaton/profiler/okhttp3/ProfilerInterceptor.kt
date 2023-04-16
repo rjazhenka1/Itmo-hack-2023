@@ -7,8 +7,8 @@ import ru.hackaton.profiler.base.Library
 import ru.hackaton.profiler.base.MeasurementService
 import ru.hackaton.profiler.base.RequestType
 import ru.hackaton.profiler.base.Stacktrace
-import ru.ok.android.itmohack2023.timelog.TimeLog
-import ru.ok.android.itmohack2023.timelog.TimeLog.start
+import ru.hackaton.profiler.timelog.TimeLog
+import ru.hackaton.profiler.timelog.TimeLog.start
 import java.io.IOException
 
 class ProfilerInterceptor(

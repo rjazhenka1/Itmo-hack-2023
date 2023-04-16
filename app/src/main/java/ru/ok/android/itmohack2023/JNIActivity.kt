@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.aspectj.lang.annotation.Aspect
 import org.json.JSONArray
 import org.json.JSONObject
-import ru.ok.android.itmohack2023.timelog.Measure
+import ru.hackaton.profiler.timelog.Measure
 
 class JNIActivity : AppCompatActivity() {
 

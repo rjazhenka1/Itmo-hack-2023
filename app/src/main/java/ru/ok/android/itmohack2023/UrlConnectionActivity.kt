@@ -6,7 +6,7 @@ import android.widget.Space
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
-import ru.ok.android.itmohack2023.timelog.TimeLog
+import ru.hackaton.profiler.timelog.TimeLog
 import java.net.URL
 
 class UrlConnectionActivity : AppCompatActivity() {

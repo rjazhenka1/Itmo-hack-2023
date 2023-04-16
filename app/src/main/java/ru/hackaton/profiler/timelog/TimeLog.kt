@@ -1,4 +1,4 @@
-package ru.ok.android.itmohack2023.timelog
+package ru.hackaton.profiler.timelog
 
 import android.annotation.SuppressLint
 import android.content.Context

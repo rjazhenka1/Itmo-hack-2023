@@ -13,8 +13,5 @@ class ItmohackApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        FrescoClient().getClient(this)
-        PicassoClient().getPicasso(this)
-        GlideClient().getClient(this)
     }
 }
