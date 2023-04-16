@@ -1,13 +1,12 @@
 package ru.hackaton.profiler.picasso
 
-import android.app.Application
 import android.content.Context
 import com.squareup.picasso.Picasso
 
 class PicassoClient {
-    fun getPicasso(context: Context) {
+    fun initiate(context: Context) {
         val builder = Picasso.Builder(context)
-        builder.downloader(ProfilerPicassoExecutorService())
+        builder.downloader(ProfilerPicassoExecutorService("Picasso"))
         Picasso.setSingletonInstance(builder.build())
     }
 }

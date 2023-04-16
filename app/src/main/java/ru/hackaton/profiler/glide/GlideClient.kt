@@ -8,7 +8,7 @@ import com.bumptech.glide.GlideBuilder
 
 class GlideClient {
     @SuppressLint("VisibleForTests")
-    fun getClient(context: Context) {
-        Glide.init(context, GlideBuilder().addGlobalRequestListener(ProfilerGladRequestListener<Any>()))
+    fun initiate(context: Context) {
+        Glide.init(context, GlideBuilder().addGlobalRequestListener(ProfilerGladRequestListener<Any>("Glide")))
     }
 }

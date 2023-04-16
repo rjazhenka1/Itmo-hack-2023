@@ -1,40 +1,47 @@
 package ru.hackaton.profiler.exoplayer
 
+import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.analytics.AnalyticsListener
-import com.google.android.exoplayer2.analytics.DefaultAnalyticsCollector
-import com.google.android.exoplayer2.decoder.DecoderCounters
-import com.google.android.exoplayer2.util.Clock
+import com.google.android.exoplayer2.source.LoadEventInfo
+import com.google.android.exoplayer2.source.MediaLoadData
+import ru.hackaton.profiler.base.Library
+import ru.hackaton.profiler.base.MeasurementService
+import ru.hackaton.profiler.base.RequestType
+import ru.ok.android.itmohack2023.timelog.TimeLog
 
-class ProfilerAnalyticsCollector : AnalyticsListener {
-    override fun onAudioEnabled(
-        eventTime: AnalyticsListener.EventTime,
-        decoderCounters: DecoderCounters
-    ) {
-        super.onAudioEnabled(eventTime, decoderCounters)
-        println("enable")
+class ProfilerAnalyticsCollector(
+    private val name: String
+) : AnalyticsListener {
+    private fun getRequestType(mediaLoadData: MediaLoadData): RequestType {
+        if (mediaLoadData.trackType == C.TRACK_TYPE_VIDEO) {
+            return RequestType.Video
+        } else if (mediaLoadData.trackType == C.TRACK_TYPE_AUDIO) {
+            return RequestType.Audio
+        }
+        return RequestType.Unknown;
     }
 
-    override fun onAudioDisabled(
+
+    override fun onLoadStarted(
         eventTime: AnalyticsListener.EventTime,
-        decoderCounters: DecoderCounters
+        loadEventInfo: LoadEventInfo,
+        mediaLoadData: MediaLoadData
     ) {
-        super.onAudioDisabled(eventTime, decoderCounters)
-        println("disable")
+        val measurement = MeasurementService.startMeasurement(
+            loadEventInfo.loadTaskId.toString(),
+            name,
+            Library.ExoPlayer,
+            getRequestType(mediaLoadData)
+        )
     }
 
-    override fun onVideoEnabled(
+    override fun onLoadCompleted(
         eventTime: AnalyticsListener.EventTime,
-        decoderCounters: DecoderCounters
+        loadEventInfo: LoadEventInfo,
+        mediaLoadData: MediaLoadData
     ) {
-        super.onVideoEnabled(eventTime, decoderCounters)
-        println("enable")
-    }
-
-    override fun onVideoDisabled(
-        eventTime: AnalyticsListener.EventTime,
-        decoderCounters: DecoderCounters
-    ) {
-        super.onVideoDisabled(eventTime, decoderCounters)
-        println("disable")
+        val measurement = MeasurementService.endMeasurement(loadEventInfo.loadTaskId.toString())
+        measurement?.size = loadEventInfo.bytesLoaded
+        measurement?.url = loadEventInfo.uri.toString()
     }
 }

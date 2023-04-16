@@ -4,16 +4,16 @@ import com.squareup.picasso.Downloader
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
+import ru.hackaton.profiler.base.Library
 import ru.hackaton.profiler.okhttp3.ProfilerInterceptor
 import java.io.IOException
 
-class ProfilerPicassoExecutorService : Downloader {
+class ProfilerPicassoExecutorService(name: String) : Downloader {
     private val client = OkHttpClient.Builder()
-        .addInterceptor(ProfilerInterceptor())
+        .addInterceptor(ProfilerInterceptor(name, Library.Picasso))
         .build()
 
     override fun load(request: Request): Response {
-        println("request")
         return client
             .newCall(request)
             .execute()
@@ -25,5 +25,4 @@ class ProfilerPicassoExecutorService : Downloader {
         } catch (ignored: IOException) {
         }
     }
-
 }

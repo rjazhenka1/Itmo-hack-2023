@@ -11,7 +11,7 @@ class ExoPlayerClient {
     fun getClient(context: Context) : ExoPlayer {
         val analyticsCollector = DefaultAnalyticsCollector(Clock.DEFAULT)
 
-        analyticsCollector.addListener(ProfilerAnalyticsCollector())
+        analyticsCollector.addListener(ProfilerAnalyticsCollector("ExoPlayer"))
 
         return ExoPlayer.Builder(context).setAnalyticsCollector(analyticsCollector).build()
     }
